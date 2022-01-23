@@ -13,12 +13,10 @@ const CategoryPostLayout = () => {
     slug: router.query.slug,
   };
 
-  const { data: posts, error } = useSWR('getCategoryBasedPostDetails', () =>
-    getCategoryPost(variables),
-  );
+  const { data: posts, error } = useSWR('getCategoryPost', () => getCategoryPost(variables));
 
   useEffect(() => {
-    mutate('getCategoryBasedPostDetails');
+    mutate('getCategoryPost');
   }, [router.query.slug]);
 
   return (
@@ -53,7 +51,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
   const posts = (await getCategoryPost(variables)) || [];
 
-  const identifier = 'getCategoryBasedPostDetails';
+  const identifier = 'getCategoryPost';
 
   return {
     props: {
@@ -67,9 +65,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 export const getStaticPaths: GetStaticPaths = async () => {
   const categories = await getCategories();
   const paths = categories.map((category: any) => ({ params: { slug: category.slug } }));
+
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 };
 
