@@ -7,21 +7,21 @@ import useSWR, { SWRConfig } from 'swr';
 const HomeLayout = () => {
   const { data: posts, error } = useSWR('getPosts', () => getPosts());
   return (
-    <div className='container mx-auto px-2 md:px-10 mb-8 '>
+    <div className='container mx-auto px-6 lg:px-10 mb-4 '>
       <Head>
         <title>Next Blog</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <div className='grid grid-cols-1 md:grid-cols-12 gap-12'>
-        <div className='md:col-span-8 col-span-1'>
+      <div className='grid grid-cols-1 lg:grid-cols-12 lg:gap-12'>
+        <div className='lg:col-span-8 col-span-1'>
           {posts.map((post: any) => (
             <PostCard key={post.node.title} post={post.node} />
           ))}
         </div>
 
-        <div className='md:col-span-4 col-span-1'>
-          <div className='md:sticky relative top-8'>
+        <div className='lg:col-span-4 col-span-1'>
+          <div className='lg:sticky relative top-8'>
             <PostWidget />
             <Categories />
           </div>

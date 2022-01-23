@@ -4,19 +4,19 @@ import Link from 'next/link';
 
 const PostCard = ({ post }: any) => {
   return (
-    <div className='bg-white shadow-lg rounded-lg p-0 md:px-2 md:pt-2 pb-4 mb-4'>
+    <div className='bg-white shadow-lg rounded-lg p-0 lg:px-2 lg:pt-2 pb-4 mb-6'>
       <div className='relative overflow-hidden shadow-md pb-80 mb-6'>
         <img
           src={post.featuredImage.url}
           alt={post.title}
-          className='object-top absolute h-80 w-full object-cover shadow-lg rounded-t-lg md:rounded-lg'
+          className='object-top absolute h-80 w-full object-cover shadow-lg rounded-t-lg lg:rounded-lg'
         />
       </div>
       <h1 className='transition duration-500 text-center mb-4 cursor-pointer hover:text-pink-600 text-3xl font-semibold'>
         <Link href={`/post/${post.slug}`}>{post.title}</Link>
       </h1>
-      <div className='block md:flex text-center items-center justify-center mb-4 w-full'>
-        <div className='flex items-center justify-center mb-4 md:mb-0 w-full md:w-auto mr-8'>
+      <div className='block lg:flex text-center items-center justify-center mb-4 w-full'>
+        <div className='flex items-center justify-center mb-4 lg:mb-0 w-full lg:w-auto mr-8'>
           <img
             src={post.author.photo.url}
             alt={post.author.name}
@@ -44,7 +44,7 @@ const PostCard = ({ post }: any) => {
           <span>{moment(post.createdAt).format('MMM DD, YYYY')}</span>
         </div>
       </div>
-      <p className='text-center text-lg text-grey-700 font-normal px-4 md:px-2 mb-4'>
+      <p className='text-center text-lg text-grey-700 font-normal px-4 lg:px-2 mb-4'>
         {post.excerpt}
       </p>
       <div className='text-center'>

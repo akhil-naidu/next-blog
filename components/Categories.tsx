@@ -13,7 +13,7 @@ const Categories = () => {
   if (error) console.log(error);
 
   return (
-    <div className='bg-white shadow-lg rounded-lg p-4'>
+    <div className='bg-white shadow-lg rounded-lg p-4 mb-4'>
       <h3 className='text-xl  font-semibold border-b pb-4 mb-4'>Categories</h3>
       {categories?.map((category: CategoryType) => (
         <Link key={category.name} href={`/categories/${category.slug}`}>

@@ -64,13 +64,13 @@ const PostDetail = ({ post }: any) => {
     }
   };
   return (
-    <div className='bg-white shadow-lg rounded-lg md:p-2 pb-12 mb-8'>
-      <div className='relative overflow-hidden shadow-md mb-6 md:rounded-lg rounded-t-lg'>
+    <div className='bg-white shadow-lg rounded-lg lg:p-2 pb-12 mb-8'>
+      <div className='relative overflow-hidden shadow-md mb-6 lg:rounded-lg rounded-t-lg'>
         <img src={post.featuredImage.url} alt={post.title} className='object-top h-full w-full ' />
       </div>
-      <div className='px-4 md:px-4'>
-        <div className='block md:flex text-center items-center  mb-4 w-full'>
-          <div className='flex items-center justify-center mb-4 md:mb-0 w-full md:w-auto mr-8'>
+      <div className='px-4 lg:px-4'>
+        <div className='block lg:flex text-center items-center  mb-4 w-full'>
+          <div className='flex items-center justify-center mb-4 lg:mb-0 w-full lg:w-auto mr-8'>
             <img
               src={post.author.photo.url}
               alt={post.author.name}
