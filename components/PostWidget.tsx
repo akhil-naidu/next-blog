@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import moment from 'moment';
 import Link from 'next/link';
 import { getRecentPosts, getSimilarPosts } from '@/services/index';
-import useSWR from 'swr';
+import useSWR, { useSWRConfig } from 'swr';
 
 interface PostWidgetProps {
   slug?: string;
@@ -17,6 +17,7 @@ interface PostType {
 }
 
 const PostWidget = ({ slug, categories }: PostWidgetProps) => {
+  const { mutate } = useSWRConfig();
   const variables = {
     slug,
     categories: categories?.map((category) => category.slug),
@@ -27,6 +28,10 @@ const PostWidget = ({ slug, categories }: PostWidgetProps) => {
     slug ? () => getSimilarPosts(variables) : () => getRecentPosts(),
   );
   if (error) console.log(error);
+
+  useEffect(() => {
+    mutate('getSimilarPosts');
+  }, [slug]);
 
   return (
     <div className='bg-white shadow-lg rounded-lg p-4 mb-8'>

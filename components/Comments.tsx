@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import moment from 'moment';
 import parse from 'html-react-parser';
-import useSWR from 'swr';
+import useSWR, { useSWRConfig } from 'swr';
 import { getComments } from '@/services/index';
 
 interface SlugType {
@@ -16,11 +16,16 @@ interface CommentType {
 }
 
 const Comments = ({ slug }: SlugType) => {
+  const { mutate } = useSWRConfig();
   const variables = {
     slug,
   };
 
   const { data: comments, error } = useSWR('getComments', () => getComments(variables));
+
+  useEffect(() => {
+    mutate('getComments');
+  }, [slug]);
 
   return (
     <>

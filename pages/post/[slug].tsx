@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { getPosts, getPostDetails } from '@/services/index';
 import {
@@ -10,16 +10,21 @@ import {
   CommentsForm,
 } from '@/components/index';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import useSWR, { SWRConfig } from 'swr';
+import useSWR, { SWRConfig, useSWRConfig } from 'swr';
 
 const PostDetailsLayOut = () => {
   const router = useRouter();
+  const { mutate } = useSWRConfig();
 
   const variables = {
     slug: router.query.slug,
   };
 
   const { data: post, error } = useSWR('getPostDetails', () => getPostDetails(variables));
+
+  useEffect(() => {
+    mutate('getPostDetails');
+  }, [router.query.slug]);
 
   return (
     <div className='container mx-auto lg:px-10 mb-4'>
