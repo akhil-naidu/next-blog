@@ -7,6 +7,7 @@ import {
   getCategoriesQuery,
   createCommentMutation,
   getCommentsQuery,
+  getCategoryPostsQuery,
 } from '@/query/index';
 
 export const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT || '';
@@ -62,10 +63,16 @@ export const submitComment = async (variables: CommentObjType) => {
 };
 
 interface SlugType {
-  slug: string;
+  slug?: string | string[];
 }
 export const getComments = async (variables: SlugType) => {
   const result = await request(graphqlAPI, getCommentsQuery, variables);
 
   return result.comments;
+};
+
+export const getCategoryPost = async (variables: SlugType) => {
+  const result = await request(graphqlAPI, getCategoryPostsQuery, variables);
+
+  return result.postsConnection.edges;
 };
