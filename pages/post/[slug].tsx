@@ -22,16 +22,18 @@ const PostDetailsLayOut = () => {
   const { data: post, error } = useSWR('getPostDetails', () => getPostDetails(variables));
 
   return (
-    <div className='container mx-auto px-6 lg:px-10 mb-4'>
+    <div className='container mx-auto lg:px-10 mb-4'>
       <div className='grid grid-cols-1 lg:grid-cols-12 lg:gap-12'>
         <div className='col-span-1 lg:col-span-8'>
           <PostDetail post={post} />
-          <Author author={post.author} />
-          <CommentsForm slug={post.slug} />
-          <Comments slug={post.slug} />
+          <div className='container px-4 lg:px-0 mb-4'>
+            <Author author={post.author} />
+            <CommentsForm slug={post.slug} />
+            <Comments slug={post.slug} />
+          </div>
         </div>
         <div className='col-span-1 lg:col-span-4'>
-          <div className='relative lg:sticky top-8'>
+          <div className='relative lg:sticky top-8 container px-4 lg:px-0 mb-4'>
             <PostWidget slug={post.slug} categories={post.categories} />
             <Categories />
           </div>
