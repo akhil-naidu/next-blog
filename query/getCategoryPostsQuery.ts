@@ -2,29 +2,43 @@ import { gql } from 'graphql-request';
 
 const getCategoryPostsQuery = gql`
   query MyQuery($slug: String!) {
-    postsConnection(where: { categories_some: { slug: $slug } }) {
-      edges {
-        cursor
-        node {
+    posts(filters: { categories: { slug: { contains: $slug } } }) {
+      data {
+        id
+        attributes {
+          title
+          slug
+          excerpt
+          featuredImage {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          categories {
+            data {
+              attributes {
+                name
+                slug
+              }
+            }
+          }
           author {
-            bio
-            name
-            id
-            photo {
-              url
+            data {
+              attributes {
+                name
+                photo {
+                  data {
+                    attributes {
+                      url
+                    }
+                  }
+                }
+              }
             }
           }
           createdAt
-          slug
-          title
-          excerpt
-          featuredImage {
-            url
-          }
-          categories {
-            name
-            slug
-          }
         }
       }
     }

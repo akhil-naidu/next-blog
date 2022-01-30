@@ -2,11 +2,16 @@ import { gql } from 'graphql-request';
 
 const getCommentsQuery = gql`
   query MyQuery($slug: String!) {
-    comments(where: { post: { slug: $slug } }) {
-      comment
-      createdAt
-      name
-      id
+    comments(filters: { post: { slug: { eq: $slug } } }) {
+      data {
+        id
+        attributes {
+          name
+          email
+          comment
+          createdAt
+        }
+      }
     }
   }
 `;

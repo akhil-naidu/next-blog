@@ -2,28 +2,43 @@ import { gql } from 'graphql-request';
 
 const getPostsQuery = gql`
   query MyQuery {
-    postsConnection {
-      edges {
-        node {
+    posts {
+      data {
+        id
+        attributes {
+          title
+          slug
+          excerpt
+          featuredImage {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          categories {
+            data {
+              attributes {
+                name
+                slug
+              }
+            }
+          }
           author {
-            bio
-            id
-            name
-            photo {
-              url
+            data {
+              attributes {
+                name
+                photo {
+                  data {
+                    attributes {
+                      url
+                    }
+                  }
+                }
+              }
             }
           }
           createdAt
-          excerpt
-          slug
-          title
-          featuredImage {
-            url
-          }
-          categories {
-            name
-            slug
-          }
         }
       }
     }

@@ -32,14 +32,14 @@ const PostDetailsLayOut = () => {
         <div className='col-span-1 lg:col-span-8'>
           <PostDetail post={post} />
           <div className='container px-4 lg:px-0 mb-4'>
-            <Author author={post.author} />
-            <CommentsForm slug={post.slug} />
-            <Comments slug={post.slug} />
+            <Author author={post.attributes.author} />
+            <CommentsForm postId={post.id} />
+            <Comments slug={post.attributes.slug} />
           </div>
         </div>
         <div className='col-span-1 lg:col-span-4'>
           <div className='relative lg:sticky top-8 container px-4 lg:px-0 mb-4'>
-            <PostWidget slug={post.slug} categories={post.categories} />
+            <PostWidget slug={post.attributes.slug} categories={post.attributes.categories} />
             <Categories />
           </div>
         </div>
@@ -75,7 +75,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = (await getPosts()) || [];
   const paths = posts.map((post: any) => ({
-    params: { slug: post.node.slug },
+    params: { slug: post.attributes.slug },
   }));
 
   return {

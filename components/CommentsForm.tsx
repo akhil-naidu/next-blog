@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { submitComment } from '@/services/index';
 
-interface SlugType {
-  slug: string;
+interface PostIdType {
+  postId: number;
 }
 
-const CommentsForm = ({ slug }: SlugType) => {
+const CommentsForm = ({ postId }: PostIdType) => {
   const [error, setError] = useState(false);
   // const [localStorage, setLocalStorage]: any = useState();
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
@@ -40,7 +40,7 @@ const CommentsForm = ({ slug }: SlugType) => {
       name,
       email,
       comment,
-      slug,
+      postId,
     };
 
     if (storeData) {

@@ -4,8 +4,10 @@ import { getCategories } from '@/services/index';
 import useSWR from 'swr';
 
 interface CategoryType {
-  name: string;
-  slug: string;
+  attributes: {
+    name: string;
+    slug: string;
+  };
 }
 
 const Header = () => {
@@ -22,9 +24,9 @@ const Header = () => {
         </div>
         <div className='hidden lg:float-left lg:contents'>
           {categories?.map((category: CategoryType) => (
-            <Link key={category.name} href={`/category/${category.slug}`}>
+            <Link key={category.attributes.name} href={`/category/${category.attributes.slug}`}>
               <span className='lg:float-right mt-2 align-middle text-white ml-4 font-semibold cursor-pointer'>
-                {category.name}
+                {category.attributes.name}
               </span>
             </Link>
           ))}

@@ -3,8 +3,12 @@ import { gql } from 'graphql-request';
 const getCategoriesQuery = gql`
   query MyQuery {
     categories {
-      name
-      slug
+      data {
+        attributes {
+          name
+          slug
+        }
+      }
     }
   }
 `;

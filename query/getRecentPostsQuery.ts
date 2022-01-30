@@ -2,13 +2,21 @@ import { gql } from 'graphql-request';
 
 const getRecentPostsQuery = gql`
   query MyQuery {
-    posts(orderBy: createdAt_ASC, last: 3) {
-      title
-      slug
-      featuredImage {
-        url
+    posts(pagination: { limit: 3 }, sort: "createdAt") {
+      data {
+        attributes {
+          title
+          slug
+          featuredImage {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          createdAt
+        }
       }
-      createdAt
     }
   }
 `;

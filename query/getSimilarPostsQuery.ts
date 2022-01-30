@@ -1,14 +1,28 @@
 import { gql } from 'graphql-request';
 
 const getSimilarPostsQuery = gql`
-  query MyQuery($slug: String!, $categories: [String!]) {
-    posts(where: { slug_not: $slug, AND: { categories_some: { slug_in: $categories } } }, last: 3) {
-      title
-      slug
-      featuredImage {
-        url
+  query MyQuery($slug: String!, $categories: String!) {
+    posts(
+      filters: {
+        slug: { notContains: $slug }
+        and: { categories: { slug: { contains: $categories } } }
       }
-      createdAt
+    ) {
+      data {
+        id
+        attributes {
+          title
+          slug
+          createdAt
+          featuredImage {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
     }
   }
 `;

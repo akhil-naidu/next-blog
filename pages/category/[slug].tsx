@@ -24,7 +24,7 @@ const CategoryPostLayout = () => {
       <div className='grid grid-cols-1 lg:grid-cols-12 gap-12'>
         <div className='col-span-1 lg:col-span-8'>
           {posts?.map((post: any, index: number) => (
-            <PostCard key={index} post={post.node} />
+            <PostCard key={index} post={post.attributes} />
           ))}
         </div>
         <div className='col-span-1 lg:col-span-4'>
@@ -64,7 +64,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const categories = await getCategories();
-  const paths = categories.map((category: any) => ({ params: { slug: category.slug } }));
+  const paths = categories.map((category: any) => ({ params: { slug: category.attributes.slug } }));
 
   return {
     paths,

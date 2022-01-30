@@ -9,9 +9,11 @@ interface SlugType {
 }
 
 interface CommentType {
-  name: string;
-  comment: string;
-  createdAt: Date;
+  attributes: {
+    name: string;
+    comment: string;
+    createdAt: Date;
+  };
   id: string;
 }
 
@@ -40,10 +42,12 @@ const Comments = ({ slug }: SlugType) => {
               className='border-b border-gray-100 mb-2 pb-2 bg-black bg-opacity-10 p-2 px-4 rounded-lg'
             >
               <p className='mb-1 '>
-                <span className='font-semibold'>{comment.name}</span> on{' '}
-                {moment(comment.createdAt).format('MMM DD, YYYY')}
+                <span className='font-semibold'>{comment.attributes.name}</span> on{' '}
+                {moment(comment.attributes.createdAt).format('MMM DD, YYYY')}
               </p>
-              <p className='whitespace-pre-line text-gray-600 w-full'>{parse(comment.comment)}</p>
+              <p className='whitespace-pre-line text-gray-600 w-full'>
+                {parse(comment.attributes.comment)}
+              </p>
             </div>
           ))}
         </div>
