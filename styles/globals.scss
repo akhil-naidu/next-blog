@@ -4,6 +4,13 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
 
+// If want to add manually do this, but using tailwindCSS typography plugin and update the tailwind config file
+// @layer components {
+//   .cms-content > h1 {
+//     @apply mt-8 mb-4 text-2xl font-extrabold;
+//   }
+// }
+
 html,
 body {
   padding: 0;

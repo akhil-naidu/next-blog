@@ -16,7 +16,7 @@ const HomeLayout = () => {
       <div className='grid grid-cols-1 lg:grid-cols-12 lg:gap-12'>
         <div className='lg:col-span-8 col-span-1'>
           {posts.map((post: any) => (
-            <PostCard key={post.node.title} post={post.node} />
+            <PostCard key={post.attributes.title} post={post.attributes} />
           ))}
         </div>
 

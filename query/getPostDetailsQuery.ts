@@ -2,28 +2,55 @@ import { gql } from 'graphql-request';
 
 const getPostDetailsQuery = gql`
   query MyQuery($slug: String!) {
-    post(where: { slug: $slug }) {
-      author {
-        bio
+    posts(filters: { slug: { eq: $slug } }) {
+      data {
         id
-        name
-        photo {
-          url
+        attributes {
+          title
+          slug
+          excerpt
+          content
+          featuredImage {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          categories {
+            data {
+              attributes {
+                name
+                slug
+              }
+            }
+          }
+          author {
+            data {
+              attributes {
+                name
+                photo {
+                  data {
+                    attributes {
+                      url
+                    }
+                  }
+                }
+                bio
+              }
+            }
+          }
+          createdAt
+          comments {
+            data {
+              attributes {
+                name
+                email
+                comment
+              }
+            }
+          }
         }
-      }
-      createdAt
-      excerpt
-      slug
-      title
-      featuredImage {
-        url
-      }
-      categories {
-        name
-        slug
-      }
-      content {
-        raw
       }
     }
   }
