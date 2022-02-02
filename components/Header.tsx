@@ -24,7 +24,7 @@ const Header = () => {
         </div>
         <div className='hidden lg:float-left lg:contents'>
           {categories?.map((category: CategoryType) => (
-            <Link key={category.attributes.name} href={`/category/${category.attributes.slug}`}>
+            <Link key={category.attributes.name} href={`/blog/category/${category.attributes.slug}`}>
               <span className='lg:float-right mt-2 align-middle text-white ml-4 font-semibold cursor-pointer'>
                 {category.attributes.name}
               </span>
