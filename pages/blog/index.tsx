@@ -9,7 +9,7 @@ const HomeLayout = () => {
   return (
     <div className='container mx-auto px-4 lg:px-10 mb-4 '>
       <Head>
-        <title>Next Blog</title>
+        <title>Selfhost</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
 
@@ -42,8 +42,6 @@ const Home = ({ fallback }: any) => {
 export const getStaticProps: GetStaticProps = async () => {
   const posts = (await getPosts()) || [];
   const identifier = 'getPosts';
-
-  console.log(posts)
 
   return {
     props: {
