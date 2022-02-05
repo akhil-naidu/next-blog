@@ -13,9 +13,9 @@ const PostDetail = ({ post }: any) => {
           className='object-top h-full w-full '
         />
       </div>
-      <div className='px-4 lg:px-4'>
-        <div className='block lg:flex text-center items-center  mb-4 w-full'>
-          <div className='flex items-center justify-center mb-4 lg:mb-0 w-full lg:w-auto mr-8'>
+      <div className='px-4'>
+        <div className='block lg:flex text-center items-center justify-center mb-4 w-full'>
+          <div className='flex items-center justify-center mb-4 lg:mb-0 w-full lg:w-auto'>
             <img
               src={post.attributes.author.data.attributes.photo.data.attributes.url}
               alt={post.attributes.author.data.attributes.name}
@@ -27,7 +27,7 @@ const PostDetail = ({ post }: any) => {
               {post.attributes.author.data.attributes.name}
             </p>
           </div>
-          <div className='font-medium text-gray-700'>
+          <div className='font-medium text-gray-700 ml-4'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               className='h-6 w-6 inline mr-2 text-pink-500'
@@ -45,11 +45,11 @@ const PostDetail = ({ post }: any) => {
             <span>{moment(post.attributes.createdAt).format('MMM DD, YYYY')}</span>
           </div>
         </div>
-        <h1 className='mb-8 text-3xl font-semibold'>{post.attributes.title}</h1>
+        <h1 className='mb-8 text-3xl font-semibold text-center'>{post.attributes.title}</h1>
         <ReactMarkdown
           children={post.attributes.content}
           remarkPlugins={[remarkGfm]}
-          className='prose'
+          className='prose mx-auto'
         />
       </div>
     </div>

@@ -7,10 +7,12 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <>
+    <div className='relative'>
       <Header />
+      <div className='pt-24'>
       {children}
-    </>
+      </div>
+    </div>
   );
 };
 
