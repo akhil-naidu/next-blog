@@ -7,7 +7,7 @@ import useSWR, { SWRConfig } from 'swr';
 const HomeLayout = () => {
   const { data: posts, error } = useSWR('getPosts', () => getPosts());
   return (
-    <div className=' container mx-auto px-4 lg:px-10 mb-4 '>
+    <div className=' container mx-auto px-2 md:px-4 lg:px-10 mb-4 '>
       <Head>
         <title>Selfhost</title>
         <link rel='icon' href='/favicon.ico' />
