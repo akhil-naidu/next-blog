@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { getPosts, getPostDetails } from '@/services/index';
+import React, { useEffect } from "react";
+import { useRouter } from "next/router";
+import { getPosts, getPostDetails } from "@/services/index";
 import {
   PostDetail,
   Categories,
@@ -8,9 +8,9 @@ import {
   Author,
   Comments,
   CommentsForm,
-} from '@/components/index';
-import { GetStaticPaths, GetStaticProps } from 'next';
-import useSWR, { SWRConfig, useSWRConfig } from 'swr';
+} from "@/components/index";
+import { GetStaticPaths, GetStaticProps } from "next";
+import useSWR, { SWRConfig, useSWRConfig } from "swr";
 
 const PostDetailsLayOut = () => {
   const router = useRouter();
@@ -20,26 +20,31 @@ const PostDetailsLayOut = () => {
     slug: router.query.slug,
   };
 
-  const { data: post, error } = useSWR('getPostDetails', () => getPostDetails(variables));
+  const { data: post, error } = useSWR("getPostDetails", () =>
+    getPostDetails(variables)
+  );
 
   useEffect(() => {
-    mutate('getPostDetails');
+    mutate("getPostDetails");
   }, [router.query.slug]);
 
   return (
-    <div className='container mx-auto lg:px-10 mb-4'>
-      <div className='grid grid-cols-1 lg:grid-cols-12 lg:gap-12'>
-        <div className='col-span-1 lg:col-span-8'>
+    <div className="container mx-auto mb-4 lg:px-10">
+      <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-12">
+        <div className="col-span-1 lg:col-span-8">
           <PostDetail post={post} />
-          <div className='container px-4 lg:px-0 mb-4'>
+          <div className="container mb-4 px-4 lg:px-0">
             <Author author={post.attributes.author} />
             <CommentsForm postId={post.id} />
             <Comments slug={post.attributes.slug} />
           </div>
         </div>
-        <div className='col-span-1 lg:col-span-4'>
-          <div className='relative lg:sticky top-8 container px-4 lg:px-0 mb-4'>
-            <PostWidget slug={post.attributes.slug} categories={post.attributes.categories} />
+        <div className="col-span-1 lg:col-span-4">
+          <div className="container relative top-8 mb-4 px-4 lg:sticky lg:px-0">
+            <PostWidget
+              slug={post.attributes.slug}
+              categories={post.attributes.categories}
+            />
             <Categories />
           </div>
         </div>
@@ -61,7 +66,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     slug: params?.slug,
   };
   const post = (await getPostDetails(variables)) || [];
-  const identifier = 'getPostDetails';
+  const identifier = "getPostDetails";
 
   return {
     props: {

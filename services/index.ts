@@ -1,4 +1,4 @@
-import { GraphQLClient, request } from 'graphql-request';
+import { GraphQLClient, request } from "graphql-request";
 import {
   getPostsQuery,
   getPostDetailsQuery,
@@ -8,10 +8,10 @@ import {
   createCommentMutation,
   getCommentsQuery,
   getCategoryPostsQuery,
-} from '@/query/index';
+} from "@/query/index";
 
-export const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT || '';
-export const strapiAPI = process.env.NEXT_PUBLIC_STRAPICMS_ENDPOINT || '';
+export const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT || "";
+export const strapiAPI = process.env.NEXT_PUBLIC_STRAPICMS_ENDPOINT || "";
 const graphCMSToken = process.env.NEXT_PUBLIC_GRAPHCMS_TOKEN;
 const strapiFullToken = process.env.NEXT_PUBLIC_STRAPI_TOKEN_FULL;
 const strapiReadToken = process.env.NEXT_PUBLIC_STRAPI_TOKEN_READ;
@@ -33,12 +33,17 @@ interface postDetailsVariablesType {
   slug?: string | string[];
 }
 export const getPostDetails = async (variables: postDetailsVariablesType) => {
-  const result = await graphQLClient(strapiReadToken).request(getPostDetailsQuery, variables);
+  const result = await graphQLClient(strapiReadToken).request(
+    getPostDetailsQuery,
+    variables
+  );
   return result.posts.data[0];
 };
 
 export const getRecentPosts = async () => {
-  const result = await graphQLClient(strapiReadToken).request(getRecentPostsQuery);
+  const result = await graphQLClient(strapiReadToken).request(
+    getRecentPostsQuery
+  );
   return result.posts.data;
 };
 
@@ -47,12 +52,17 @@ interface similarPostsVariablesType {
   categories?: any;
 }
 export const getSimilarPosts = async (variables: similarPostsVariablesType) => {
-  const result = await graphQLClient(strapiReadToken).request(getSimilarPostsQuery, variables);
+  const result = await graphQLClient(strapiReadToken).request(
+    getSimilarPostsQuery,
+    variables
+  );
   return result.posts.data;
 };
 
 export const getCategories = async () => {
-  const result = await graphQLClient(strapiReadToken).request(getCategoriesQuery);
+  const result = await graphQLClient(strapiReadToken).request(
+    getCategoriesQuery
+  );
   return result.categories.data;
 };
 
@@ -69,7 +79,10 @@ export const submitComment = async (variables: CommentObjType) => {
   //   },
   // });
 
-  const result = await graphQLClient(strapiFullToken).request(createCommentMutation, variables);
+  const result = await graphQLClient(strapiFullToken).request(
+    createCommentMutation,
+    variables
+  );
   return result.createComment;
 };
 
@@ -77,12 +90,18 @@ interface SlugType {
   slug?: string | string[];
 }
 export const getComments = async (variables: SlugType) => {
-  const result = await graphQLClient(strapiReadToken).request(getCommentsQuery, variables);
+  const result = await graphQLClient(strapiReadToken).request(
+    getCommentsQuery,
+    variables
+  );
   return result.comments.data;
 };
 
 export const getCategoryPost = async (variables: SlugType) => {
-  const result = await graphQLClient(strapiReadToken).request(getCategoryPostsQuery, variables);
+  const result = await graphQLClient(strapiReadToken).request(
+    getCategoryPostsQuery,
+    variables
+  );
 
   return result.posts.data;
 };

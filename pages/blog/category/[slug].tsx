@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import React, { useEffect } from "react";
+import { useRouter } from "next/router";
 
-import { getCategories, getCategoryPost } from '@/services/index';
-import { PostCard, Categories } from '@/components/index';
-import { GetStaticPaths, GetStaticProps } from 'next';
-import useSWR, { SWRConfig, useSWRConfig } from 'swr';
+import { getCategories, getCategoryPost } from "@/services/index";
+import { PostCard, Categories } from "@/components/index";
+import { GetStaticPaths, GetStaticProps } from "next";
+import useSWR, { SWRConfig, useSWRConfig } from "swr";
 
 const CategoryPostLayout = () => {
   const router = useRouter();
@@ -13,22 +13,24 @@ const CategoryPostLayout = () => {
     slug: router.query.slug,
   };
 
-  const { data: posts, error } = useSWR('getCategoryPost', () => getCategoryPost(variables));
+  const { data: posts, error } = useSWR("getCategoryPost", () =>
+    getCategoryPost(variables)
+  );
 
   useEffect(() => {
-    mutate('getCategoryPost');
+    mutate("getCategoryPost");
   }, [router.query.slug]);
 
   return (
-    <div className='container mx-auto px-10 mb-8'>
-      <div className='grid grid-cols-1 lg:grid-cols-12 gap-12'>
-        <div className='col-span-1 lg:col-span-8'>
+    <div className="container mx-auto mb-8 px-10">
+      <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+        <div className="col-span-1 lg:col-span-8">
           {posts?.map((post: any, index: number) => (
             <PostCard key={index} post={post.attributes} />
           ))}
         </div>
-        <div className='col-span-1 lg:col-span-4'>
-          <div className='relative lg:sticky top-8'>
+        <div className="col-span-1 lg:col-span-4">
+          <div className="relative top-8 lg:sticky">
             <Categories />
           </div>
         </div>
@@ -51,7 +53,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
   const posts = (await getCategoryPost(variables)) || [];
 
-  const identifier = 'getCategoryPost';
+  const identifier = "getCategoryPost";
 
   return {
     props: {
@@ -64,7 +66,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const categories = await getCategories();
-  const paths = categories.map((category: any) => ({ params: { slug: category.attributes.slug } }));
+  const paths = categories.map((category: any) => ({
+    params: { slug: category.attributes.slug },
+  }));
 
   return {
     paths,

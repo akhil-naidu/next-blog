@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { submitComment } from '@/services/index';
+import React, { useState, useRef, useEffect } from "react";
+import { submitComment } from "@/services/index";
 
 interface PostIdType {
   postId: number;
@@ -16,10 +16,10 @@ const CommentsForm = ({ postId }: PostIdType) => {
   const storeDataEl: any = useRef();
 
   useEffect(() => {
-    if (window.localStorage.getItem('storeData')) {
-      nameEl.current.value = window.localStorage.getItem('name');
-      emailEl.current.value = window.localStorage.getItem('email');
-      storeDataEl.current.checked = window.localStorage.getItem('storeData');
+    if (window.localStorage.getItem("storeData")) {
+      nameEl.current.value = window.localStorage.getItem("name");
+      emailEl.current.value = window.localStorage.getItem("email");
+      storeDataEl.current.checked = window.localStorage.getItem("storeData");
     }
   }, []);
 
@@ -44,13 +44,13 @@ const CommentsForm = ({ postId }: PostIdType) => {
     };
 
     if (storeData) {
-      window.localStorage.setItem('name', name);
-      window.localStorage.setItem('email', email);
-      window.localStorage.setItem('storeData', storeData);
+      window.localStorage.setItem("name", name);
+      window.localStorage.setItem("email", email);
+      window.localStorage.setItem("storeData", storeData);
     } else {
-      window.localStorage.removeItem('name');
-      window.localStorage.removeItem('email');
-      window.localStorage.setItem('storeData', storeData);
+      window.localStorage.removeItem("name");
+      window.localStorage.removeItem("email");
+      window.localStorage.setItem("storeData", storeData);
     }
 
     submitComment(commentObj).then((res) => {
@@ -62,60 +62,66 @@ const CommentsForm = ({ postId }: PostIdType) => {
   };
 
   return (
-    <div className='bg-white shadow-lg rounded-lg px-8 py-4 pb-8 mb-4'>
-      <h3 className='text-xl mb-4 font-semibold border-b pb-4'>Leave a Reply</h3>
-      <div className='grid grid-cols-1 gap-4 mb-4'>
+    <div className="mb-4 rounded-lg bg-white px-8 py-4 pb-8 shadow-lg">
+      <h3 className="mb-4 border-b pb-4 text-xl font-semibold">
+        Leave a Reply
+      </h3>
+      <div className="mb-4 grid grid-cols-1 gap-4">
         <textarea
           ref={commentEl}
-          className='p-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-gray-200 bg-gray-100 text-gray-700'
-          placeholder='Comment'
-          name='comment'
+          className="w-full rounded-lg bg-gray-100 p-4 text-gray-700 outline-none focus:ring-2 focus:ring-gray-200"
+          placeholder="Comment"
+          name="comment"
           rows={4}
         />
       </div>
-      <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4'>
+      <div className="mb-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
         <input
-          type='text'
+          type="text"
           ref={nameEl}
-          className=' py-2 px-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-gray-200 bg-gray-100 text-gray-700'
-          placeholder='Name'
-          name='name'
+          className=" w-full rounded-lg bg-gray-100 py-2 px-4 text-gray-700 outline-none focus:ring-2 focus:ring-gray-200"
+          placeholder="Name"
+          name="name"
         />
 
         <input
-          type='text'
+          type="text"
           ref={emailEl}
-          className=' py-2 px-4 outline-none w-full rounded-lg focus:ring-2 focus:ring-gray-200 bg-gray-100 text-gray-700'
-          placeholder='Email'
-          name='email'
+          className=" w-full rounded-lg bg-gray-100 py-2 px-4 text-gray-700 outline-none focus:ring-2 focus:ring-gray-200"
+          placeholder="Email"
+          name="email"
         />
       </div>
-      <div className='grid grid-cols-1 gap-4 mb-4'>
+      <div className="mb-4 grid grid-cols-1 gap-4">
         <div>
           <input
-            type='checkbox'
+            type="checkbox"
             ref={storeDataEl}
-            id='storeDataID'
-            name='storeData'
-            value='true'
-            className='mr-4'
+            id="storeDataID"
+            name="storeData"
+            value="true"
+            className="mr-4"
           />
-          <label className='text-gray-500 cursor-pointer' htmlFor='storeDataID'>
+          <label className="cursor-pointer text-gray-500" htmlFor="storeDataID">
             Save my Name and Email for the next time I comment.
           </label>
         </div>
       </div>
-      {error && <p className='text-xs text-red-500 float-right'>All Field are Required</p>}
-      <div className='mt-4'>
+      {error && (
+        <p className="float-right text-xs text-red-500">
+          All Field are Required
+        </p>
+      )}
+      <div className="mt-4">
         <button
-          type='button'
+          type="button"
           onClick={handleSubmit}
-          className='transition duration-500 ease hover:bg-indigo-900 inline-block bg-pink-600 text-lg rounded-full text-white px-6 py-1 cursor-pointer'
+          className="ease inline-block cursor-pointer rounded-full bg-pink-600 px-6 py-1 text-lg text-white transition duration-500 hover:bg-indigo-900"
         >
           Post Comment
         </button>
         {showSuccessMessage && (
-          <span className='text-xl float-right font-semibold mt-2 text-green-500 '>
+          <span className="float-right mt-2 text-xl font-semibold text-green-500 ">
             Comment Submitted for review
           </span>
         )}

@@ -1,9 +1,9 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from "next";
 
-import { GraphQLClient } from 'graphql-request';
-import { createCommentMutation } from '@/query/index';
+import { GraphQLClient } from "graphql-request";
+import { createCommentMutation } from "@/query/index";
 
-const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT || '';
+const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT || "";
 const graphCMSToken = process.env.GRAPHCMS_TOKEN;
 
 const comments = async (req: NextApiRequest, res: NextApiResponse<any>) => {

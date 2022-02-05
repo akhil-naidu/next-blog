@@ -1,4 +1,4 @@
-import { gql } from 'graphql-request';
+import { gql } from "graphql-request";
 
 const getSimilarPostsQuery = gql`
   query MyQuery($slug: String!, $categories: String!) {
